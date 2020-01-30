@@ -14,15 +14,11 @@ import com.yts.ytscleanarchitecture.presentation.base.BaseViewModel
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
-class SearchViewModel @Inject constructor(application: Application) : BaseViewModel(application) {
+
+class SearchViewModel(application: Application, private val searchUseCase: SearchUseCase) :
+    BaseViewModel(application) {
     private var searchDisposable: Disposable? = null
-
-    private val searchUseCase: SearchUseCase by lazy {
-        SearchUseCaseImp(SearchRepositoryImp)
-    }
-
 
     private var _query = MutableLiveData<String>()
     private var _sort = MutableLiveData<String>()
@@ -101,3 +97,4 @@ class SearchViewModel @Inject constructor(application: Application) : BaseViewMo
 
 
 }
+

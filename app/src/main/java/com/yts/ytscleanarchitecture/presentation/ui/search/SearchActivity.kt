@@ -7,7 +7,6 @@ import android.util.SparseArray
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yts.ytscleanarchitecture.BR
@@ -18,11 +17,12 @@ import com.yts.ytscleanarchitecture.presentation.base.BackDoubleClickFinishActiv
 import com.yts.ytscleanarchitecture.utils.EndlessRecyclerOnScrollListener
 import com.yts.ytscleanarchitecture.utils.LinearLayoutManagerWrapper
 import kotlinx.android.synthetic.main.activity_search.*
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchActivity : BackDoubleClickFinishActivity<SearchBinding>(), View.OnClickListener {
-    @Inject
-    lateinit var searchAdapter: SearchAdapter
+    private val searchAdapter: SearchAdapter by inject()
+    private val model: SearchViewModel by viewModel()
 
     override fun onLayoutId(): Int {
         return R.layout.activity_search
@@ -31,8 +31,7 @@ class SearchActivity : BackDoubleClickFinishActivity<SearchBinding>(), View.OnCl
     override fun setupViewModel(): SparseArray<ViewModel> {
         val setupViewModel = SparseArray<ViewModel>()
         setupViewModel.put(
-            BR.model,
-            ViewModelProvider(this).get(SearchViewModel::class.java)
+            BR.model, model
         )
         return setupViewModel
     }
@@ -72,10 +71,10 @@ class SearchActivity : BackDoubleClickFinishActivity<SearchBinding>(), View.OnCl
     }
 
     override fun observer() {
-        binding.model?.isLoading?.observe(this, Observer {
+        model.isLoading.observe(this, Observer {
             loading.showLoading(it)
         })
-        binding.model?.toastMessage?.observe(this, Observer {
+        model.toastMessage.observe(this, Observer {
             makeToast(it)
         })
 
@@ -94,7 +93,7 @@ class SearchActivity : BackDoubleClickFinishActivity<SearchBinding>(), View.OnCl
             }
         })
 
-        binding.model?.listDocument?.observe(this, Observer {
+        model.listDocument.observe(this, Observer {
 
             searchAdapter.submitList(it)
             searchAdapter.notifyDataSetChanged()

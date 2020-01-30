@@ -2,15 +2,15 @@ package  com.yts.ytscleanarchitecture.presentation.base
 
 import android.os.Bundle
 import android.util.SparseArray
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.util.keyIterator
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import com.yts.ytscleanarchitecture.extension.hideKeyboard
-import dagger.android.support.DaggerAppCompatActivity
 
 
-abstract class BaseActivity<B : ViewDataBinding> : DaggerAppCompatActivity() {
+abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
     private var mLastClickTime: Long = 0
 
     abstract fun onLayoutId(): Int

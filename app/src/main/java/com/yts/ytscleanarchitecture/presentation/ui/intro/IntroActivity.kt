@@ -15,8 +15,6 @@ import java.util.concurrent.TimeUnit
 
 
 class IntroActivity : BaseActivity<IntroBinding>() {
-
-
     override fun onLayoutId(): Int {
         return R.layout.activity_intro
     }
