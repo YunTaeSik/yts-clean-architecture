@@ -4,6 +4,7 @@ import com.yts.data.repository.SearchRepositoryImp
 import com.yts.domain.repository.SearchRepository
 import com.yts.domain.usecase.search.SearchUseCase
 import com.yts.domain.usecase.search.SearchUseCaseImp
+import com.yts.ytscleanarchitecture.presentation.ui.intro.IntroViewModel
 import com.yts.ytscleanarchitecture.presentation.ui.search.SearchAdapter
 import com.yts.ytscleanarchitecture.presentation.ui.search.SearchViewModel
 import org.koin.android.ext.koin.androidApplication
@@ -13,8 +14,6 @@ import org.koin.dsl.module
 val repositoryModule = module {
     single<SearchRepository> { SearchRepositoryImp }
     single<SearchUseCase> { SearchUseCaseImp(get()) }
-
-    single<SearchAdapter> { SearchAdapter() }
 }
 
 var adapterModule = module {
@@ -23,6 +22,10 @@ var adapterModule = module {
 
 
 var viewModelModule = module {
+    viewModel {
+        IntroViewModel(androidApplication())
+    }
+
     viewModel {
         SearchViewModel(androidApplication(), get())
     }

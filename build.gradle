@@ -19,8 +19,8 @@ buildscript {
         rxandroid_version = '2.1.1'
 
         retrofit_version = '2.7.1'
-        retrofit_converter_gson_version = '2.4.0'
-        retrofit_adapter_rxjava_version = '2.5.0'
+        retrofit_converter_gson_version = '2.6.1'
+        retrofit_adapter_rxjava_version = '2.6.1'
 
         koin_version = "2.1.0-alpha-10"
 
