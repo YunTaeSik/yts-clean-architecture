@@ -1,5 +1,5 @@
 ## Clean Architecture
-  
+  기존 Architecture 에서 Module 세분화를 시킴
  <div>
   <img src="http://miro.medium.com/max/1258/1*a-AUcEVdyRJhIepo9JyJBw.png" hspace=8 width = 250>
  </div>
