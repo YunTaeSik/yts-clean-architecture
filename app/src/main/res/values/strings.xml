@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">YtsCleanArchitecture</string>
+
+    <string name="msg_quit">Pressing the "back" button ends.</string>
+
+    <string name="cancel">"Cancel"</string>
+    <string name="search">"Search"</string>
+
+    <string name="error_message">"An error occurred. Please check your network."</string>
+    <string name="error_query_text_null_message">"ERROR = QUERY NULL"</string>
+    <string name="error_query_size_null_message">"No results were found for your search."</string>
+
 </resources>
