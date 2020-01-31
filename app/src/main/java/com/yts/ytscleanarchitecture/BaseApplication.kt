@@ -3,7 +3,7 @@ package com.yts.ytscleanarchitecture
 import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
-import com.yts.ytscleanarchitecture.presentation.di.module.moduleList
+import com.yts.ytscleanarchitecture.di.module.moduleList
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
