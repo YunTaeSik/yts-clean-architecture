@@ -11,7 +11,7 @@
 현재 저는 MVVM패턴을 사용하고있습니다.  
  - [base (각종 Base 클래스)](https://github.com/YunTaeSik/YtsCleanArchitecture/tree/master/app/src/main/java/com/yts/ytscleanarchitecture/presentation/base)
  - [bidingAdapter (Android BindingAdapter)](https://github.com/YunTaeSik/YtsCleanArchitecture/tree/master/app/src/main/java/com/yts/ytscleanarchitecture/presentation/bindingAdapter) 
- - [di (Koin)](https://github.com/YunTaeSik/YtsCleanArchitecture/tree/master/app/src/main/java/com/yts/ytscleanarchitecture/presentation/di)
+ - [di (Koin)](https://github.com/YunTaeSik/YtsCleanArchitecture/tree/master/app/src/main/java/com/yts/ytscleanarchitecture/di)
  - [ui (View, ViewModel)](https://github.com/YunTaeSik/YtsCleanArchitecture/tree/master/app/src/main/java/com/yts/ytscleanarchitecture/presentation/ui)
    
 
