@@ -74,7 +74,7 @@ class SearchActivity : BackDoubleClickFinishActivity<SearchBinding>(), View.OnCl
         model.isLoading.observe(this, Observer {
             loading.showLoading(it)
         })
-        model.toastMessage.observe(this, Observer {
+        model.toastMessageId.observe(this, Observer {
             makeToast(it)
         })
 

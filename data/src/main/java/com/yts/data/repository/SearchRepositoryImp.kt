@@ -6,6 +6,7 @@ import com.yts.domain.response.SearchResponse
 import io.reactivex.Observable
 
 object SearchRepositoryImp : SearchRepository {
+    private const val authorization = "KakaoAK f1328266d7ef1949f7cd02c8ba212a72"
     private var searchService = SearchService.Creator.create()
 
 
@@ -16,7 +17,7 @@ object SearchRepositoryImp : SearchRepository {
         size: Int?
     ): Observable<SearchResponse> {
         return searchService.getImages(
-            "KakaoAK ebc0afd8be627ae7946c041011b88705",
+            authorization,
             query,
             sort,
             page,

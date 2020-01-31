@@ -3,10 +3,8 @@ package com.yts.ytscleanarchitecture.presentation.ui.search
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.yts.data.repository.SearchRepositoryImp
 import com.yts.domain.entity.Document
 import com.yts.domain.usecase.search.SearchUseCase
-import com.yts.domain.usecase.search.SearchUseCaseImp
 import com.yts.ytscleanarchitecture.R
 import com.yts.ytscleanarchitecture.extension.addAll
 import com.yts.ytscleanarchitecture.extension.clear
@@ -16,8 +14,7 @@ import io.reactivex.disposables.Disposable
 import java.util.concurrent.TimeUnit
 
 
-class SearchViewModel(application: Application, private val searchUseCase: SearchUseCase) :
-    BaseViewModel(application) {
+class SearchViewModel(private val searchUseCase: SearchUseCase) : BaseViewModel() {
     private var searchDisposable: Disposable? = null
 
     private var _query = MutableLiveData<String>()
@@ -75,7 +72,7 @@ class SearchViewModel(application: Application, private val searchUseCase: Searc
                 ).subscribe({
 
                     if (it.documents?.size == 0) {
-                        _toastMessage.postValue(context.getString(R.string.error_query_size_null_message))
+                        _toastMessageId.postValue(R.string.error_query_size_null_message)
                     }
                     if (it.meta?.total_count != _listDocument.value?.size) {
                         _listDocument.addAll(it.documents!!)
@@ -86,12 +83,12 @@ class SearchViewModel(application: Application, private val searchUseCase: Searc
                     _isLoading.postValue(false)
                 }, {
                     it.printStackTrace()
-                    _toastMessage.postValue(context.getString(R.string.error_message))
+                    _toastMessageId.postValue(R.string.error_message)
                     _isLoading.postValue(false)
                 })
             )
         } else {
-            _toastMessage.postValue(context.getString(R.string.error_query_text_null_message))
+            _toastMessageId.postValue(R.string.error_query_text_null_message)
         }
     }
 
