@@ -15,7 +15,7 @@
  - [ui (View, ViewModel)](https://github.com/YunTaeSik/YtsCleanArchitecture/tree/master/app/src/main/java/com/yts/ytscleanarchitecture/presentation/ui)
    
 
- **Domain Layer**  (domain android module)
+ **Domain Layer**  (domain java/kotlin module)
    
   Domain Layer는 순수한 Java나 Kotlin 모듈입니다. 그 이유는 도메인 레이어에서 일어나는 이유는 실제로 사용자가 하는 일련의 행동들을 적용하는 것인데 이 역시 안드로이드에 의존할 필요가 없기 때문입니다. 
 저는 Entity, Response , Repository, UseCase를 담았습니다.
@@ -27,7 +27,7 @@
 
 
    
- **Data Layer**  (domain  java/kotlin module)
+ **Data Layer**  (data  android module)
    
 Data Layer 에서는 Domain Layer를 알고 있으므로  Domain Layer에 정의된 Repository를 실제로 구현을 하는 것입니다.   
 여기에서는 Data Source에의 의존성이 생기므로 안드로이드 의존성이 생길 수 있습니다.
