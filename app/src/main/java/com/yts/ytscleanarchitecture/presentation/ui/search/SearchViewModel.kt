@@ -92,6 +92,9 @@ class SearchViewModel(private val searchUseCase: SearchUseCase) : BaseViewModel(
         }
     }
 
+    override fun onCleared() {
+        super.onCleared()
+    }
 
 }
 

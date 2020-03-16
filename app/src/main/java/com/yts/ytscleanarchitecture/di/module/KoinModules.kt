@@ -3,7 +3,6 @@ package com.yts.ytscleanarchitecture.di.module
 import com.yts.data.repository.SearchRepositoryImp
 import com.yts.domain.repository.SearchRepository
 import com.yts.domain.usecase.search.SearchUseCase
-import com.yts.domain.usecase.search.SearchUseCaseImp
 import com.yts.ytscleanarchitecture.presentation.ui.intro.IntroViewModel
 import com.yts.ytscleanarchitecture.presentation.ui.search.SearchAdapter
 import com.yts.ytscleanarchitecture.presentation.ui.search.SearchViewModel
@@ -18,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val repositoryModule = module {
     single<SearchRepository> { SearchRepositoryImp(get()) }
-    single<SearchUseCase> { SearchUseCaseImp(get()) }
+    single<SearchUseCase> { SearchUseCase(get()) }
 }
 
 var adapterModule = module {
