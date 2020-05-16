@@ -23,7 +23,6 @@ fun Context.getIntegerPreference(key: String): Int {
     return this.getSharedPreferences(this.packageName, Context.MODE_PRIVATE).getInt(key, 0)
 }
 
-
 fun Context.setIntegerPreference(key: String, value: Int) {
     this.getSharedPreferences(this.packageName, Context.MODE_PRIVATE).edit {
         putInt(key, value)
