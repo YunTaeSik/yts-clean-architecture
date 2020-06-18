@@ -13,6 +13,8 @@
     </data>
 
 
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -37,26 +39,15 @@
                 android:padding="16dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/search_activity_keyword"
+                    android:id="@+id/text_filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="4dp"
                     android:layout_marginStart="4dp"
-                    android:fontFamily="@font/notosans_bold"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="25sp"
-                    android:visibility="visible"
-                    tools:text="All" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/search_activity_keyword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:fontFamily="@font/notosans_bold"
                     android:textColor="@color/colorAccent"
                     android:textSize="25sp"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     tools:text="All" />
 
                 <androidx.appcompat.widget.AppCompatEditText
@@ -83,7 +74,7 @@
                     android:paddingEnd="4dp"
                     android:paddingBottom="8dp"
                     android:visibility="visible"
-                    app:srcCompat="@drawable/ic_close_white_16dp" />
+                    app:srcCompat="@drawable/ic_close_black_16dp" />
 
             </LinearLayout>
 

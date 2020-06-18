@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">YtsCleanArchitecture</string>
 
+    <string name="intro_text" translatable="false">"KaKao<b>commerce</b>\nTest"</string>
+    <string name="intro_sub_text" translatable="false">"안녕하세요\n<b>윤태식</b>입니다"</string>
+
     <string name="msg_quit">Pressing the "back" button ends.</string>
 
     <string name="cancel">"Cancel"</string>
