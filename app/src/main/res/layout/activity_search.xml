@@ -48,6 +48,17 @@
                     android:visibility="visible"
                     tools:text="All" />
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/search_activity_keyword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/notosans_bold"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="25sp"
+                    android:visibility="gone"
+                    tools:text="All" />
+
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/edit_search"
                     android:layout_width="0dp"
