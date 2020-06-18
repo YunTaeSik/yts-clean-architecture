@@ -8,7 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.create
 
 class SearchRepositoryImp(private val retrofit: Retrofit) : SearchRepository {
-    private val authorization = "KakaoAK f1328266d7ef1949f7cd02c8ba212a72"
+    private val authorization = "KakaoAK ebc0afd8be627ae7946c041011b88705"
 
     override fun getImages(
         query: String,

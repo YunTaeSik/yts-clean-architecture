@@ -1,6 +1,5 @@
 package com.yts.ytscleanarchitecture.presentation.ui.search
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.yts.domain.entity.Document
@@ -10,7 +9,6 @@ import com.yts.ytscleanarchitecture.extension.addAll
 import com.yts.ytscleanarchitecture.extension.clear
 import com.yts.ytscleanarchitecture.presentation.base.BaseViewModel
 import io.reactivex.Observable
-import io.reactivex.Scheduler
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
@@ -18,6 +16,8 @@ import java.util.concurrent.TimeUnit
 
 class SearchViewModel(private val searchUseCase: SearchUseCase) : BaseViewModel() {
     private var searchDisposable: Disposable? = null
+
+    private var _viewType = MutableLiveData<SearchViewType>()
 
     private var _query = MutableLiveData<String>()
     private var _sort = MutableLiveData<String>()
@@ -30,28 +30,45 @@ class SearchViewModel(private val searchUseCase: SearchUseCase) : BaseViewModel(
     val sort: LiveData<String> get() = _sort
     val size: LiveData<Int> get() = _size
     val page: LiveData<Int> get() = _page
+    val viewType: LiveData<SearchViewType> get() = _viewType
 
     val listDocument: LiveData<List<Document>> get() = _listDocument
 
+    fun setViewType(viewType: SearchViewType) {
+        _viewType.postValue(viewType)
+    }
+
     fun setQuery(query: String) {
-        _query.value = query
+        _query.postValue(query)
+
+        if (query != null && query.isNotEmpty()) {
+            setViewType(SearchViewType.RESULT)
+        } else {
+            setViewType(SearchViewType.NONE)
+        }
     }
 
     fun setPage(page: Int) {
-        _page.value = page
+        _page.postValue(page)
     }
 
     /**
      * 검색
      */
     fun search(query: String) {
+        _isLoading.postValue(false)
         setQuery(query)
+
         searchDisposable?.dispose()
         if (query.isNotEmpty()) {
+            _isLoading.postValue(true)
             searchDisposable =
-                Observable.timer(1, TimeUnit.SECONDS)
+                Observable.timer(500, TimeUnit.MILLISECONDS)
                     .subscribe({
+                        _isLoading.postValue(false)
+
                         _listDocument.clear()
+                        setPage(1)
                         getImages()
                     }, {
                         it.printStackTrace()

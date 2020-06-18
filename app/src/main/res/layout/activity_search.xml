@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data class="SearchBinding">
+    <data>
 
         <import type="android.view.View" />
 
@@ -13,19 +13,30 @@
     </data>
 
 
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#ffffff">
 
         <LinearLayout
+            android:id="@+id/layout_header"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:animateLayoutChanges="true"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/notosans_medium"
+                android:padding="16dp"
+                android:text="@string/kakao_commerce"
+                android:textSize="25sp" />
 
             <!--검색창-->
             <LinearLayout
@@ -36,7 +47,10 @@
                 android:background="@color/colorPrimaryDark"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/text_filter"
@@ -47,23 +61,27 @@
                     android:fontFamily="@font/notosans_bold"
                     android:textColor="@color/colorAccent"
                     android:textSize="25sp"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     tools:text="All" />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/edit_search"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:fontFamily="@font/notosans_bold"
-                    android:hint="@string/search"
+                    android:fontFamily="@font/notosans_regular"
+                    android:hint="@string/search_hint"
                     android:imeOptions="actionDone"
                     android:inputType="text"
                     android:singleLine="true"
                     android:text="@{model.query}"
                     android:textColor="@color/textColor"
-                    android:textSize="25sp" />
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/btn_text_delete"
@@ -73,33 +91,35 @@
                     android:paddingTop="8dp"
                     android:paddingEnd="4dp"
                     android:paddingBottom="8dp"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:srcCompat="@drawable/ic_close_black_16dp" />
 
             </LinearLayout>
 
-
-            <FrameLayout
+            <ProgressBar
+                android:id="@+id/loading"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="4dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:indeterminate="true"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_search" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/list_search"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </FrameLayout>
         </LinearLayout>
 
-        <ProgressBar
-            android:id="@+id/loading"
+        <com.google.android.material.circularreveal.CircularRevealFrameLayout
+            android:id="@+id/content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:visibility="gone"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/layout_header" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

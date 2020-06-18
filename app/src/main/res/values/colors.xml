@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="background">#ffffff</color>
     <color name="cardBackground">#ffffff</color>
 
     <color name="colorPrimary">#ffffff</color>
@@ -9,6 +10,8 @@
 
     <color name="textColor">#000000</color>
     <color name="textColorHint">#dbdfe0</color>
+
+    <color name="gray">#6e7375</color>
 
 
     <color name="tintColor">#000000</color>

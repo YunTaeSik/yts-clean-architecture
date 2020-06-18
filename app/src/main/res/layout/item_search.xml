@@ -12,23 +12,33 @@
 
     </data>
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:minHeight="100dp"
-        android:orientation="horizontal"
-        app:cardBackgroundColor="@color/colorPrimary"
-        app:cardCornerRadius="4dp">
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image"
-            srcCompat="@{data.image_url}"
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:background="@color/cardBackground"
-            android:scaleType="fitCenter" />
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintDimensionRatio="10:7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </com.google.android.material.card.MaterialCardView>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image"
+                srcCompat="@{data.image_url}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/cardBackground"
+                android:scaleType="fitCenter" />
+
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

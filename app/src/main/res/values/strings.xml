@@ -1,16 +1,27 @@
 <resources>
     <string name="app_name">YtsCleanArchitecture</string>
 
+    <string name="kakao_commerce" translatable="false">"KaKaocommerce"</string>
+    <string name="search" translatable="false">"Search"</string>
+
     <string name="intro_text" translatable="false">"KaKao<b>commerce</b>\nTest"</string>
     <string name="intro_sub_text" translatable="false">"안녕하세요\n<b>윤태식</b>입니다"</string>
+
 
     <string name="msg_quit">Pressing the "back" button ends.</string>
 
     <string name="cancel">"Cancel"</string>
-    <string name="search">"Search"</string>
+    <string name="search_hint">"Search"</string>
 
     <string name="error_message">"An error occurred. Please check your network."</string>
     <string name="error_query_text_null_message">"ERROR = QUERY NULL"</string>
     <string name="error_query_size_null_message">"No results were found for your search."</string>
+
+    <string name="ment1" translatable="false">"<b>‘동기부여가 잘 된’</b>"</string>
+    <string name="ment2" translatable="false">"<b>‘일이 자기 삶에 큰 의미가 있는’</b>"</string>
+    <string name="ment3" translatable="false">"<b>‘일에 최선을 다하는’</b>"</string>
+    <string name="ment4" translatable="false">"<b>‘함께 일하는 동료를 존중하는’</b>"</string>
+    <string name="ment5" translatable="false">"<b>‘윤태식’</b>이 되도록 하겠습니다"</string>
+
 
 </resources>

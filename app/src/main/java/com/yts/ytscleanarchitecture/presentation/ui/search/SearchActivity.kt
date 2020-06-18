@@ -1,28 +1,34 @@
 package com.yts.ytscleanarchitecture.presentation.ui.search
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Editable
+import android.text.Spannable
+import android.text.SpannableStringBuilder
 import android.text.TextWatcher
+import android.text.style.StyleSpan
 import android.util.SparseArray
 import android.view.View
+import androidx.core.view.ViewCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.yts.ytscleanarchitecture.BR
 import com.yts.ytscleanarchitecture.R
-import com.yts.ytscleanarchitecture.databinding.SearchBinding
-import com.yts.ytscleanarchitecture.extension.*
+import com.yts.ytscleanarchitecture.databinding.ActivitySearchBinding
+import com.yts.ytscleanarchitecture.extension.makeToast
+import com.yts.ytscleanarchitecture.extension.showLoading
+import com.yts.ytscleanarchitecture.extension.visible
 import com.yts.ytscleanarchitecture.presentation.base.BackDoubleClickFinishActivity
-import com.yts.ytscleanarchitecture.utils.EndlessRecyclerOnScrollListener
-import com.yts.ytscleanarchitecture.utils.LinearLayoutManagerWrapper
+import com.yts.ytscleanarchitecture.utils.Consts
 import kotlinx.android.synthetic.main.activity_search.*
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SearchActivity : BackDoubleClickFinishActivity<SearchBinding>(), View.OnClickListener {
-    private val searchAdapter: SearchAdapter by inject()
+class SearchActivity : BackDoubleClickFinishActivity<ActivitySearchBinding>(),
+    View.OnClickListener {
     private val model: SearchViewModel by viewModel()
+
+    private var currentFragmentTag: String? = null
 
     override fun onLayoutId(): Int {
         return R.layout.activity_search
@@ -36,40 +42,35 @@ class SearchActivity : BackDoubleClickFinishActivity<SearchBinding>(), View.OnCl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+
+        ViewCompat.setTransitionName(
+            text_title,
+            Consts.TRANS_VIEW_NAME_TITLE
+        )
         initView()
 
     }
 
     private fun initView() {
         btn_text_delete.setOnClickListener(this)
-        settingSearchList()
+        model.setViewType(SearchViewType.NONE)
     }
 
-    private fun settingSearchList() {
-        list_search.layoutManager = LinearLayoutManagerWrapper(this, RecyclerView.VERTICAL, false)
-        list_search.adapter = searchAdapter
 
-        /**
-         * 터치시 키보드 가림
-         */
-        list_search.setOnTouchListener { _, _ ->
-            hideKeyboard()
-            false
+    private fun changeFragment(fragment: Fragment) {
+        val tag = fragment.javaClass.simpleName
+        if (currentFragmentTag == null || currentFragmentTag != tag) {
+            currentFragmentTag = tag
+            val fragmentManager = supportFragmentManager
+            val fragmentTransaction =
+                fragmentManager.beginTransaction()
+            fragmentTransaction
+                .replace(R.id.content, fragment, tag)
+                .commitAllowingStateLoss()
         }
-
-        /**
-         * Load More 함수
-         */
-        list_search.addOnScrollListener(object :
-            EndlessRecyclerOnScrollListener(list_search.layoutManager as LinearLayoutManager) {
-            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
-                log("onLoadMore page = $page")
-                binding.model?.setPage(page)
-                binding.model?.getImages()
-            }
-
-        })
     }
+
 
     override fun observer() {
         model.isLoading.observe(this, Observer {
@@ -78,13 +79,42 @@ class SearchActivity : BackDoubleClickFinishActivity<SearchBinding>(), View.OnCl
         model.toastMessageId.observe(this, Observer {
             makeToast(it)
         })
+        model.viewType.observe(this, Observer { type ->
+            if (type == SearchViewType.NONE) {
+                var spannableStringBuilder =
+                    SpannableStringBuilder(getString(R.string.kakao_commerce))
+                spannableStringBuilder.setSpan(
+                    StyleSpan(Typeface.BOLD),
+                    5,
+                    13,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+
+                text_title.text = spannableStringBuilder
+
+                changeFragment(SearchFragment.newInstance())
+            } else if (type == SearchViewType.RESULT) {
+
+                var spannableStringBuilder =
+                    SpannableStringBuilder(getString(R.string.search))
+                spannableStringBuilder.setSpan(
+                    StyleSpan(Typeface.BOLD),
+                    0,
+                    6,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+                text_title.text = spannableStringBuilder
+
+                changeFragment(SearchResultFragment.newInstance())
+            }
+        })
+        model.query.observe(this, Observer { query ->
+            btn_text_delete.visible(query != null && query.isNotEmpty())
+        })
 
         edit_search.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-
-                btn_text_delete.visible(s != null && s.isNotEmpty())
-
-                binding.model?.search(s.toString())
+                model.search(s.toString())
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -94,10 +124,7 @@ class SearchActivity : BackDoubleClickFinishActivity<SearchBinding>(), View.OnCl
             }
         })
 
-        model.listDocument.observe(this, Observer {
-            searchAdapter.submitList(it)
-            searchAdapter.notifyDataSetChanged()
-        })
+
     }
 
     override fun onClick(v: View?) {
