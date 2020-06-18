@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data class="SearchBinding">
 
@@ -31,26 +32,47 @@
                 android:layout_height="wrap_content"
                 android:animateLayoutChanges="true"
                 android:background="@color/colorPrimaryDark"
-                android:orientation="horizontal">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/search_activity_keyword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/notosans_bold"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="25sp"
+                    android:visibility="visible"
+                    tools:text="All" />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/edit_search"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@color/colorPrimaryDark"
+                    android:background="@null"
+                    android:fontFamily="@font/notosans_bold"
                     android:hint="@string/search"
-                    android:padding="16dp"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:singleLine="true"
                     android:text="@{model.query}"
-                    android:textColor="@color/textColor" />
+                    android:textColor="@color/textColor"
+                    android:textSize="25sp" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/btn_text_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:visibility="gone"
-                    app:srcCompat="@drawable/ic_close_white_24dp" />
+                    android:paddingStart="4dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="4dp"
+                    android:paddingBottom="8dp"
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/ic_close_white_16dp" />
 
             </LinearLayout>
 

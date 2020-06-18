@@ -10,7 +10,9 @@ import com.yts.ytscleanarchitecture.extension.addAll
 import com.yts.ytscleanarchitecture.extension.clear
 import com.yts.ytscleanarchitecture.presentation.base.BaseViewModel
 import io.reactivex.Observable
+import io.reactivex.Scheduler
 import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
 
@@ -69,31 +71,30 @@ class SearchViewModel(private val searchUseCase: SearchUseCase) : BaseViewModel(
                     sort.value,
                     page.value,
                     size.value
-                ).subscribe({
+                )
+                    .observeOn(Schedulers.io())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe({
 
-                    if (it.documents?.size == 0) {
-                        _toastMessageId.postValue(R.string.error_query_size_null_message)
-                    }
-                    if (it.meta?.total_count != _listDocument.value?.size) {
-                        _listDocument.addAll(it.documents!!)
-                    } else {
+                        if (it.documents?.size == 0) {
+                            _toastMessageId.postValue(R.string.error_query_size_null_message)
+                        }
+                        if (it.meta?.total_count != _listDocument.value?.size) {
+                            _listDocument.addAll(it.documents!!)
+                        } else {
 
-                    }
+                        }
 
-                    _isLoading.postValue(false)
-                }, {
-                    it.printStackTrace()
-                    _toastMessageId.postValue(R.string.error_message)
-                    _isLoading.postValue(false)
-                })
+                        _isLoading.postValue(false)
+                    }, {
+                        it.printStackTrace()
+                        _toastMessageId.postValue(R.string.error_message)
+                        _isLoading.postValue(false)
+                    })
             )
         } else {
             _toastMessageId.postValue(R.string.error_query_text_null_message)
         }
-    }
-
-    override fun onCleared() {
-        super.onCleared()
     }
 
 }

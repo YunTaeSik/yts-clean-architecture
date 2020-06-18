@@ -30,9 +30,7 @@ class SearchActivity : BackDoubleClickFinishActivity<SearchBinding>(), View.OnCl
 
     override fun setupViewModel(): SparseArray<ViewModel> {
         val setupViewModel = SparseArray<ViewModel>()
-        setupViewModel.put(
-            BR.model, model
-        )
+        setupViewModel.put(BR.model, model)
         return setupViewModel
     }
 
@@ -44,7 +42,10 @@ class SearchActivity : BackDoubleClickFinishActivity<SearchBinding>(), View.OnCl
 
     private fun initView() {
         btn_text_delete.setOnClickListener(this)
+        settingSearchList()
+    }
 
+    private fun settingSearchList() {
         list_search.layoutManager = LinearLayoutManagerWrapper(this, RecyclerView.VERTICAL, false)
         list_search.adapter = searchAdapter
 
@@ -94,7 +95,6 @@ class SearchActivity : BackDoubleClickFinishActivity<SearchBinding>(), View.OnCl
         })
 
         model.listDocument.observe(this, Observer {
-
             searchAdapter.submitList(it)
             searchAdapter.notifyDataSetChanged()
         })
