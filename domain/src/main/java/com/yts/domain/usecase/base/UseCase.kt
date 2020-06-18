@@ -11,6 +11,9 @@ abstract class UseCase<T> {
 
     internal abstract fun buildUseCase(): Observable<T>
 
+    /**
+     * Unit type은 자바의 void와 같은 역할을 합니다.
+     */
     open fun execute(
         onSuccess: ((t: T) -> Unit),
         onError: ((t: Throwable) -> Unit),
