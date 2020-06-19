@@ -35,12 +35,12 @@ fun TextView.startCircularRevealAnimation() {
                 var animator = ViewAnimationUtils.createCircularReveal(
                     this,
                     this.left,
-                    this.right,
+                    this.top,
                     startRadius,
                     endRadius.toFloat()
                 )
                 animator.interpolator = FastOutSlowInInterpolator()
-                animator.duration = 500
+                animator.duration = 750
                 this.visibility = View.VISIBLE
                 animator.start()
             } catch (e: Exception) {

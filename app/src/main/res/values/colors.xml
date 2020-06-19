@@ -6,10 +6,12 @@
     <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">#ffffff</color>
     <color name="colorPrimaryLight">#ffffff</color>
-    <color name="colorAccent">#0fd393</color>
+    <color name="colorAccent">#000000</color>
 
     <color name="textColor">#000000</color>
     <color name="textColorHint">#dbdfe0</color>
+
+    <color name="colorOrange">#FB8C00</color>
 
     <color name="gray">#6e7375</color>
 

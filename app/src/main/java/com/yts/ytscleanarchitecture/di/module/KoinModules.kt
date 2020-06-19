@@ -3,6 +3,7 @@ package com.yts.ytscleanarchitecture.di.module
 import com.yts.data.repository.SearchRepositoryImp
 import com.yts.domain.repository.SearchRepository
 import com.yts.domain.usecase.search.SearchUseCase
+import com.yts.ytscleanarchitecture.presentation.ui.filter.FilterAdapter
 import com.yts.ytscleanarchitecture.presentation.ui.intro.IntroViewModel
 import com.yts.ytscleanarchitecture.presentation.ui.search.SearchAdapter
 import com.yts.ytscleanarchitecture.presentation.ui.search.SearchViewModel
@@ -22,6 +23,7 @@ val repositoryModule = module {
 
 var adapterModule = module {
     single<SearchAdapter> { SearchAdapter() }
+    single<FilterAdapter> { FilterAdapter() }
 }
 
 var netModule = module {

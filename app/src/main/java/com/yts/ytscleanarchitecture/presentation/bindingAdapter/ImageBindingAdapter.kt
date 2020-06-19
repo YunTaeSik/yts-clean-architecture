@@ -10,7 +10,7 @@ object ImageBindingAdapter {
     @BindingAdapter("srcCompat")
     fun srcCompat(view: ImageView, url: String) {
 
-        Glide.with(view.context).load(url).thumbnail(0.1f)
+        Glide.with(view.context).load(url)
             .error(R.drawable.img_error)
             .into(view)
     }

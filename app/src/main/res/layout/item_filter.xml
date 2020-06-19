@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="String" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:background="@color/background"
+        app:cardBackgroundColor="@color/background"
+        app:cardElevation="1dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/merriweather_regular"
+            android:paddingStart="16dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="4dp"
+            android:stateListAnimator="@drawable/filter_item_state_list_anim"
+            android:text="@{data}"
+            android:textColor="@color/textColor"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            tools:text="ALL" />
+    </com.google.android.material.card.MaterialCardView>
+
+
+</layout>

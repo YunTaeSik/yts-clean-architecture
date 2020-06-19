@@ -95,7 +95,8 @@ class SearchActivity : BackDoubleClickFinishActivity<ActivitySearchBinding>(),
 
                 text_title.text = spannableStringBuilder
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    text_title.animate().translationZ(1.5f).setDuration(200).setInterpolator(FastOutSlowInInterpolator()).start()
+                    text_title.animate().translationZ(1.5f).setDuration(200)
+                        .setInterpolator(FastOutSlowInInterpolator()).start()
                 }
 
                 changeFragment(SearchFragment.newInstance())
@@ -112,19 +113,32 @@ class SearchActivity : BackDoubleClickFinishActivity<ActivitySearchBinding>(),
 
                 text_title.text = spannableStringBuilder
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    text_title.animate().translationZ(1.0f).setDuration(200).setInterpolator(FastOutSlowInInterpolator()).start()
+                    text_title.animate().translationZ(1.0f).setDuration(200)
+                        .setInterpolator(FastOutSlowInInterpolator()).start()
                 }
 
 
                 changeFragment(SearchResultFragment.newInstance())
             }
         })
+
         model.query.observe(this, Observer { query ->
             btn_text_delete.visible(query != null && query.isNotEmpty())
+        })
+        model.filter.observe(this, Observer { filter ->
+            if (filter != null && filter.isNotEmpty()) {
+                text_filter.text = filter
+                text_filter.startCircularRevealAnimation()
+            } else {
+                text_filter.visibility = View.GONE
+            }
         })
 
         edit_search.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
+                model.clearFilter()
+                model.clearFilterHashSet()
+                model.clearDocumentList()
                 model.search(s.toString())
             }
 

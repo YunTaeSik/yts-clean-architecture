@@ -34,5 +34,8 @@
                     @transition/shared_element_trans
                 </item>
     </style>
+    <style name="Progress">
+        <item name="colorAccent">@color/tintColor</item>
+    </style>
 
 </resources>

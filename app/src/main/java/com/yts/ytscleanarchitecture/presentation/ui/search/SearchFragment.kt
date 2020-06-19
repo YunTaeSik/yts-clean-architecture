@@ -44,6 +44,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             .inflateTransition(R.transition.slide_out_trans)
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+    }
     override fun observer() {
     }
 }
