@@ -66,6 +66,8 @@ dependencies {
     implementation "org.koin:koin-androidx-fragment:$koin_version"
     implementation "org.koin:koin-androidx-ext:$koin_version"
 
+    implementation "com.google.android:flexbox:$flexbox_version"
+
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_compiler_version"
 
