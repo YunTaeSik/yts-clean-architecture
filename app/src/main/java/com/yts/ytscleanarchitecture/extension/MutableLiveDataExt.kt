@@ -13,10 +13,5 @@ fun <T> MutableLiveData<List<T>>.addAll(values: List<T>) {
 }
 
 fun <T> MutableLiveData<List<T>>.clear() {
-    if (this.value != null) {
-        val value: ArrayList<T> = this.value as ArrayList<T>
-        value.clear()
-        this.postValue(value)
-    }
-
+    this.postValue(ArrayList<T>())
 }

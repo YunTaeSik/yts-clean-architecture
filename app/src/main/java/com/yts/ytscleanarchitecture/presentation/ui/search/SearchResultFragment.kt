@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.SparseArray
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yts.ytscleanarchitecture.BR
@@ -11,7 +12,6 @@ import com.yts.ytscleanarchitecture.R
 import com.yts.ytscleanarchitecture.databinding.FragmentSearchResultBinding
 import com.yts.ytscleanarchitecture.presentation.base.BaseFragment
 import com.yts.ytscleanarchitecture.presentation.ui.filter.FilterAdapter
-import com.yts.ytscleanarchitecture.utils.GridLayoutManagerWrapper
 import kotlinx.android.synthetic.main.fragment_search_result.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -48,7 +48,9 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(), Filter
     }
 
     override fun onDestroyView() {
+        list_search.removeOnScrollListener(searchScrollListener)
         list_filter.adapter = null
+        list_search.adapter = null
         super.onDestroyView()
     }
 
@@ -60,16 +62,11 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(), Filter
     }
 
     private fun settingSearchList() {
-        val layoutManager = GridLayoutManagerWrapper(context, 3)
+        val layoutManager = GridLayoutManager(context, 3)
         list_search.layoutManager = layoutManager
         list_search.adapter = searchAdapter
 
-        list_search.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                model.loadMore(layoutManager.findLastCompletelyVisibleItemPosition())
-            }
-        })
+        list_search.addOnScrollListener(searchScrollListener)
     }
 
 
@@ -83,9 +80,18 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(), Filter
             false
         }*/
 
+    private val searchScrollListener: RecyclerView.OnScrollListener =
+        object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                model.loadMore((recyclerView.layoutManager as GridLayoutManager).findLastCompletelyVisibleItemPosition())
+            }
+        }
+
     override fun observer() {
         model.filter.observe(this, Observer {
-            list_search.smoothScrollToPosition(0)
+                list_search.smoothScrollToPosition(0)
         })
 
         model.filterHashSet.observe(this, Observer { filterHashSet ->
@@ -95,7 +101,6 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(), Filter
 
         model.documentFilterList.observe(this, Observer {
             searchAdapter.submitList(it)
-            //  searchAdapter.notifyDataSetChanged()
         })
     }
 

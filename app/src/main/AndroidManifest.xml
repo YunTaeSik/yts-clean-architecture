@@ -22,6 +22,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".presentation.ui.search.SearchActivity" />
+        <activity
+            android:name=".presentation.ui.image.ImageDetailActivity"
+            android:theme="@style/AppTheme.FullScreen" />
     </application>
 
 </manifest>

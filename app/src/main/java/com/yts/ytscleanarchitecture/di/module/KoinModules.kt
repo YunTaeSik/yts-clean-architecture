@@ -4,6 +4,7 @@ import com.yts.data.repository.SearchRepositoryImp
 import com.yts.domain.repository.SearchRepository
 import com.yts.domain.usecase.search.SearchUseCase
 import com.yts.ytscleanarchitecture.presentation.ui.filter.FilterAdapter
+import com.yts.ytscleanarchitecture.presentation.ui.image.ImageDetailViewModel
 import com.yts.ytscleanarchitecture.presentation.ui.intro.IntroViewModel
 import com.yts.ytscleanarchitecture.presentation.ui.search.SearchAdapter
 import com.yts.ytscleanarchitecture.presentation.ui.search.SearchViewModel
@@ -40,7 +41,9 @@ var viewModelModule = module {
     viewModel {
         IntroViewModel()
     }
-
+    viewModel {
+        ImageDetailViewModel()
+    }
     viewModel {
         SearchViewModel(get())
     }

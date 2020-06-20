@@ -20,20 +20,32 @@
         <!--   <item name="android:windowEnterTransition" tools:targetApi="lollipop">@android:transition/no_transition</item>
            <item name="android:windowExitTransition" tools:targetApi="lollipop">@android:transition/no_transition</item>-->
         <!-- enable window content transitions -->
-             <item name="android:windowActivityTransitions" tools:targetApi="lollipop">true</item>
-             <item name="android:windowEnterTransition" tools:targetApi="lollipop">
-                 @transition/fade_in_trans
-             </item>
-             <item name="android:windowExitTransition" tools:targetApi="lollipop">
-                 @transition/fade_out_trans
-             </item>
-                <item name="android:windowSharedElementEnterTransition" tools:targetApi="lollipop">
-                    @transition/shared_element_trans
-                </item>
-                <item name="android:windowSharedElementExitTransition" tools:targetApi="lollipop">
-                    @transition/shared_element_trans
-                </item>
+        <item name="android:windowActivityTransitions" tools:targetApi="lollipop">true</item>
+        <item name="android:windowEnterTransition" tools:targetApi="lollipop">
+            @transition/fade_in_trans
+        </item>
+        <item name="android:windowExitTransition" tools:targetApi="lollipop">
+            @transition/fade_out_trans
+        </item>
+        <item name="android:windowSharedElementEnterTransition" tools:targetApi="lollipop">
+            @transition/shared_element_trans
+        </item>
+        <item name="android:windowSharedElementExitTransition" tools:targetApi="lollipop">
+            @transition/shared_element_trans
+        </item>
     </style>
+
+
+    <style name="AppTheme.FullScreen" parent="AppTheme">
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
+        <item name="android:windowTranslucentNavigation" tools:targetApi="kitkat">false</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
+    </style>
+
     <style name="Progress">
         <item name="colorAccent">@color/tintColor</item>
     </style>

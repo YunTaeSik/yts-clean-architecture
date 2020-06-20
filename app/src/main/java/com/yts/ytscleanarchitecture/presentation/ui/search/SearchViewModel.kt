@@ -150,7 +150,6 @@ class SearchViewModel(private val searchUseCase: SearchUseCase) : BaseViewModel(
             Observable.timer(500, TimeUnit.MILLISECONDS)
                 .subscribe({
                     _isLoading.postValue(false)
-
                     getImages(1)
                 }, {
                     it.printStackTrace()
