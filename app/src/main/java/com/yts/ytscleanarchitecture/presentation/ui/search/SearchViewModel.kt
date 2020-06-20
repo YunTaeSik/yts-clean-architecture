@@ -1,5 +1,6 @@
 package com.yts.ytscleanarchitecture.presentation.ui.search
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.yts.domain.entity.Document
@@ -44,6 +45,8 @@ class SearchViewModel(private val searchUseCase: SearchUseCase) : BaseViewModel(
     val documentFilterList: LiveData<List<Document>> get() = _documentFilterList
 
     val filterHashSet: LiveData<HashSet<String>> get() = _filterHashSet
+
+    private var isEnd = false
 
     fun setQuery(query: String) {
         _query.value = query
@@ -159,7 +162,7 @@ class SearchViewModel(private val searchUseCase: SearchUseCase) : BaseViewModel(
      */
     fun loadMore(findLastCompletelyVisibleItemPosition: Int) {
         if (findLastCompletelyVisibleItemPosition == documentFilterList.value!!.size - 1) {
-            if (!_isLoading.value!!) {
+            if (!_isLoading.value!! && !isEnd) {
                 getImages(page.value!! + 1)
             }
         }
@@ -186,8 +189,11 @@ class SearchViewModel(private val searchUseCase: SearchUseCase) : BaseViewModel(
                         if (it.documents?.size == 0) {
                             _toastMessageId.postValue(R.string.error_query_size_null_message)
                         } else if (it.meta?.total_count != _documentList.value?.size) {
+                            Log.e("is_end", it.meta?.is_end.toString())
+                            Log.e("total_count", it.meta?.total_count.toString())
+                            Log.e("size", _documentList.value?.size.toString())
+                            isEnd = it.meta?.is_end!!
                             setDocumentList(it)
-                            setFilterHashSet(it.documents)
                         }
                         setPage(page)
                         _isLoading.postValue(false)
@@ -203,7 +209,7 @@ class SearchViewModel(private val searchUseCase: SearchUseCase) : BaseViewModel(
     /**
      * 필터 리스트 셋
      */
-    private fun setFilterHashSet(documents: List<Document>?) {
+    fun setFilterHashSet(documents: List<Document>?) {
         if (documents != null) {
             var filterHashSet: HashSet<String> = HashSet()
             filterHashSet.add(Const.FILTER_ALL)

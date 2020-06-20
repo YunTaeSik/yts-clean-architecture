@@ -8,7 +8,6 @@ import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.TextWatcher
 import android.text.style.StyleSpan
-import android.util.Log
 import android.util.SparseArray
 import android.view.View
 import androidx.core.view.ViewCompat
@@ -135,8 +134,8 @@ class SearchActivity : BackDoubleClickFinishActivity<ActivitySearchBinding>(),
             btn_text_delete.visible(query != null && query.isNotEmpty())
         })
         model.documentList.observe(this, Observer {
-            Log.e("set","dddsads");
             model.setDocumentFilterList(it)
+            model.setFilterHashSet(it)
         })
 
         model.filter.observe(this, Observer { filter ->
@@ -160,7 +159,7 @@ class SearchActivity : BackDoubleClickFinishActivity<ActivitySearchBinding>(),
 
         edit_search.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-           model.changeQueryText(s.toString())
+                model.changeQueryText(s.toString())
 
             }
 

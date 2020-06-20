@@ -11,7 +11,7 @@ class GridLayoutManagerWrapper(var context: Context?, val count: Int) :
     override fun onLayoutChildren(recycler: RecyclerView.Recycler?, state: RecyclerView.State?) {
         try {
             super.onLayoutChildren(recycler, state)
-        } catch (e: IndexOutOfBoundsException) {
+        } catch (e: Exception) {
             Log.e("TAG", "meet a IOOBE in RecyclerView")
         }
     }
