@@ -48,6 +48,12 @@ class SearchViewModel(private val searchUseCase: SearchUseCase) : BaseViewModel(
 
     private var isEnd = false
 
+    //SearchActivity Fragmetn viewtype 설정
+    fun setViewType(viewType: SearchViewType) {
+        _viewType.postValue(viewType)
+    }
+
+    //검색어
     fun setQuery(query: String) {
         _query.value = query
 
@@ -58,14 +64,12 @@ class SearchViewModel(private val searchUseCase: SearchUseCase) : BaseViewModel(
         }
     }
 
+    //페이지
     fun setPage(page: Int) {
         _page.postValue(page)
     }
 
-    fun setViewType(viewType: SearchViewType) {
-        _viewType.postValue(viewType)
-    }
-
+    //필터 설정
     fun setFilter(filter: String) {
         _isLoading.postValue(true)
         _filter.postValue(filter)
@@ -81,13 +85,13 @@ class SearchViewModel(private val searchUseCase: SearchUseCase) : BaseViewModel(
         )
     }
 
-    fun setDocumentList(searchResponse: SearchResponse) {
+    //이미지 검색 리스트
+    private fun setDocumentList(searchResponse: SearchResponse) {
         _documentList.addAll(searchResponse.documents!!)
-
     }
 
 
-    fun setDocumentFilterList(filter: String?) {
+    private fun setDocumentFilterList(filter: String?) {
         setDocumentFilterList(filter, documentList.value)
     }
 
@@ -95,7 +99,8 @@ class SearchViewModel(private val searchUseCase: SearchUseCase) : BaseViewModel(
         setDocumentFilterList(filter.value, documentList)
     }
 
-    fun setDocumentFilterList(filter: String?, documentList: List<Document>?) {
+    //이미지 검색에서 필터 리스트
+    private fun setDocumentFilterList(filter: String?, documentList: List<Document>?) {
         if (filter == null || filter == Const.FILTER_ALL) {
             _documentFilterList.postValue(documentList)
         } else {
@@ -111,6 +116,7 @@ class SearchViewModel(private val searchUseCase: SearchUseCase) : BaseViewModel(
         }
     }
 
+    //검색어가 변경됐을때
     fun changeQueryText(query: String) {
         clearFilter()
         clearFilterHashSet()
@@ -159,13 +165,15 @@ class SearchViewModel(private val searchUseCase: SearchUseCase) : BaseViewModel(
     /**
      * Load More
      */
-    fun loadMore(findLastCompletelyVisibleItemPosition: Int) {
+    fun loadMore(findLastCompletelyVisibleItemPosition: Int): Boolean {
         if (findLastCompletelyVisibleItemPosition == documentFilterList.value!!.size - 1) {
             if (!_isLoading.value!! && !isEnd) {
                 getImages(page.value!! + 1)
+                Log.e("loadMore", "loadMore")
+                return true
             }
         }
-
+        return false
     }
 
     /**
@@ -173,6 +181,7 @@ class SearchViewModel(private val searchUseCase: SearchUseCase) : BaseViewModel(
      */
     private fun getImages(page: Int) {
         if (query.value != null && query.value!!.isNotEmpty()) {
+            Log.e("get", "getImage")
             _isLoading.postValue(true)
             addDisposable(
                 searchUseCase.getImages(
@@ -189,8 +198,6 @@ class SearchViewModel(private val searchUseCase: SearchUseCase) : BaseViewModel(
                             _toastMessageId.postValue(R.string.error_query_size_null_message)
                         } else if (it.meta?.total_count != _documentList.value?.size) {
                             Log.e("is_end", it.meta?.is_end.toString())
-                            Log.e("total_count", it.meta?.total_count.toString())
-                            Log.e("size", _documentList.value?.size.toString())
                             isEnd = it.meta?.is_end!!
                             setDocumentList(it)
                         }

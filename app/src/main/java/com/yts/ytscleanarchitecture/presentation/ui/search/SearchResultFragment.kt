@@ -54,6 +54,7 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(), Filter
         super.onDestroyView()
     }
 
+    //필터 리스트 설정
     private fun settingFilterList() {
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         list_filter.layoutManager = layoutManager
@@ -61,6 +62,7 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(), Filter
         list_filter.adapter = filterAdapter
     }
 
+    //검색 리스트 설정
     private fun settingSearchList() {
         val layoutManager = GridLayoutManager(context, 3)
         list_search.layoutManager = layoutManager
@@ -69,17 +71,7 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(), Filter
         list_search.addOnScrollListener(searchScrollListener)
     }
 
-
-    /*
-        */
-    /**
-     * 터치시 키보드 가림
-     *//*
-        list_search.setOnTouchListener { _, _ ->
-            activity?.hideKeyboard()
-            false
-        }*/
-
+    //로드 모어
     private val searchScrollListener: RecyclerView.OnScrollListener =
         object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -91,7 +83,7 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(), Filter
 
     override fun observer() {
         model.filter.observe(this, Observer {
-                list_search.smoothScrollToPosition(0)
+            list_search.smoothScrollToPosition(0)
         })
 
         model.filterHashSet.observe(this, Observer { filterHashSet ->
@@ -100,10 +92,11 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(), Filter
         })
 
         model.documentFilterList.observe(this, Observer {
-            searchAdapter.submitList(it)
+            searchAdapter.submitList(it?.toMutableList())
         })
     }
 
+    //필터 아이템 클릭 이벤트 리스너
     override fun onFilterItemClick(filter: String) {
         model.setFilter(filter)
     }

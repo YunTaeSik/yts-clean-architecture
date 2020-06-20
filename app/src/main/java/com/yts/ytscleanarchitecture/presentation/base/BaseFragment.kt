@@ -63,7 +63,11 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment() {
             binding!!.setVariable(setupViewModel().keyAt(i), setupViewModel().valueAt(i))
         }
         binding!!.lifecycleOwner = this
-        observer()
         return binding!!.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        observer()
     }
 }

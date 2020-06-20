@@ -10,4 +10,6 @@ class CommonDiffUtil<B> : DiffUtil.ItemCallback<B>() {
     override fun areContentsTheSame(oldItem: B, newItem: B): Boolean {
         return (Gson().toJson(oldItem)) == (Gson().toJson(newItem))
     }
+
+
 }

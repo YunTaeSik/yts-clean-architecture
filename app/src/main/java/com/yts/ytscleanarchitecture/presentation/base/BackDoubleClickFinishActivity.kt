@@ -13,17 +13,12 @@ abstract class BackDoubleClickFinishActivity<B : ViewDataBinding> : BaseActivity
     //두번클릭시 종료
     override fun onBackPressed() {
         hideKeyboard()
-        val childFragmentSize = supportFragmentManager.fragments.size
-        if (childFragmentSize > 0) {
+        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
             super.onBackPressed()
+            return
         } else {
-            if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
-                super.onBackPressed()
-                return
-            } else {
-                this.makeToast(R.string.msg_quit)
-            }
-            mBackPressed = System.currentTimeMillis()
+            this.makeToast(R.string.msg_quit)
         }
+        mBackPressed = System.currentTimeMillis()
     }
 }

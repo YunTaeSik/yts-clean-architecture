@@ -20,23 +20,6 @@ import com.yts.ytscleanarchitecture.utils.Const
 
 class SearchAdapter : ListAdapter<Document, SearchAdapter.SearchViewHolder>(
     CommonDiffUtil<Document>()
-    /* object : DiffUtil.ItemCallback<Document>() {
-        override fun areItemsTheSame(
-            oldItem: Document,
-            newItem: Document
-        ): Boolean {
-            return oldItem == newItem
-        }
-
-        override fun areContentsTheSame(
-            oldItem: Document,
-            newItem: Document
-        ): Boolean {
-            return (oldItem.collection == newItem.collection) && (oldItem.thumbnail_url == newItem.thumbnail_url) && (oldItem.image_url == newItem.image_url) && (oldItem.width == newItem.width)
-                    && (oldItem.height == newItem.height) && (oldItem.display_sitename == newItem.display_sitename) && (oldItem.doc_url == newItem.doc_url) && (oldItem.datetime == newItem.datetime)
-
-        }
-    }*/
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {

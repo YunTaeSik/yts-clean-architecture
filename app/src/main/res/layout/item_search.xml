@@ -20,7 +20,6 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:cardBackgroundColor="@color/colorPrimary"
             app:cardCornerRadius="2dp"
             app:cardElevation="1dp"
             app:layout_constraintDimensionRatio="1:1"
@@ -34,7 +33,7 @@
                 srcCompat="@{data.image_url}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/cardBackground"
+                android:background="@color/grayLight"
                 android:scaleType="centerCrop" />
 
         </com.google.android.material.card.MaterialCardView>
