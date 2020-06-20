@@ -11,6 +11,7 @@ object ImageBindingAdapter {
     fun srcCompat(view: ImageView, url: String) {
 
         Glide.with(view.context).load(url)
+            .thumbnail(0.4f)
             .error(R.drawable.img_error)
             .into(view)
     }

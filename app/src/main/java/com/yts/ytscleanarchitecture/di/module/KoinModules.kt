@@ -7,7 +7,7 @@ import com.yts.ytscleanarchitecture.presentation.ui.filter.FilterAdapter
 import com.yts.ytscleanarchitecture.presentation.ui.intro.IntroViewModel
 import com.yts.ytscleanarchitecture.presentation.ui.search.SearchAdapter
 import com.yts.ytscleanarchitecture.presentation.ui.search.SearchViewModel
-import com.yts.ytscleanarchitecture.utils.Consts
+import com.yts.ytscleanarchitecture.utils.Const
 import io.reactivex.schedulers.Schedulers
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -31,7 +31,7 @@ var netModule = module {
         Retrofit.Builder()
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(Consts.BASE_URL)
+            .baseUrl(Const.BASE_URL)
             .build()
     }
 }

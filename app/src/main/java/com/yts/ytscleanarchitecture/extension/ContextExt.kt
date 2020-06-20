@@ -11,7 +11,11 @@ import com.yts.ytscleanarchitecture.R
  * 토스트 만들기
  */
 fun Context.makeToast(id: Int) {
-    Toast.makeText(this, this.getString(id), Toast.LENGTH_LONG).show()
+    try {
+        Toast.makeText(this, this.getString(id), Toast.LENGTH_LONG).show()
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
 }
 
 fun Context.makeToast(text: String) {

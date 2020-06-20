@@ -30,7 +30,7 @@ buildscript {
 
         flexbox_version = '2.0.1'
 
-        glide_version = "4.9.0"
+        glide_version = "4.11.0"
         glide_compiler_version = "4.11.0"
 
         junit_version = '4.13'

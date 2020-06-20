@@ -29,7 +29,9 @@ class SearchAdapter : ListAdapter<Document, SearchAdapter.SearchViewHolder>(
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        if (position != RecyclerView.NO_POSITION) {
+            holder.bind(getItem(position))
+        }
     }
 
 

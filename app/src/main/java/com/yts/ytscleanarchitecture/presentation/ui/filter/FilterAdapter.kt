@@ -31,7 +31,9 @@ class FilterAdapter : ListAdapter<String, FilterAdapter.FilterViewHolder>(Common
     }
 
     override fun onBindViewHolder(holder: FilterViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        if (position != RecyclerView.NO_POSITION) {
+            holder.bind(getItem(position))
+        }
     }
 
 

@@ -13,7 +13,7 @@ import com.yts.ytscleanarchitecture.databinding.IntroBinding
 import com.yts.ytscleanarchitecture.extension.startCircularRevealAnimation
 import com.yts.ytscleanarchitecture.presentation.base.BaseActivity
 import com.yts.ytscleanarchitecture.presentation.ui.search.SearchActivity
-import com.yts.ytscleanarchitecture.utils.Consts
+import com.yts.ytscleanarchitecture.utils.Const
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_intro.*
@@ -45,7 +45,7 @@ class IntroActivity : BaseActivity<IntroBinding>() {
         model.addDisposable(Single.timer(1500, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { _ ->
-                var pair: Pair<View, String> = Pair.create(text_title, Consts.TRANS_VIEW_NAME_TITLE)
+                var pair: Pair<View, String> = Pair.create(text_title, Const.TRANS_VIEW_NAME_TITLE)
                 val optionsCompat =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(
                         this,
