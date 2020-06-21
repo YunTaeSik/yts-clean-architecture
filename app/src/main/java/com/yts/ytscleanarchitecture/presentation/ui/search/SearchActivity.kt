@@ -1,7 +1,6 @@
 package com.yts.ytscleanarchitecture.presentation.ui.search
 
 import android.graphics.Typeface
-import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.Spannable
@@ -12,7 +11,6 @@ import android.util.SparseArray
 import android.view.View
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
-import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.yts.ytscleanarchitecture.BR
@@ -102,10 +100,6 @@ class SearchActivity : BackDoubleClickFinishActivity<ActivitySearchBinding>(),
                 )
 
                 text_title.text = spannableStringBuilder
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    text_title.animate().translationZ(1.5f).setDuration(200)
-                        .setInterpolator(FastOutSlowInInterpolator()).start()
-                }
 
                 changeFragment(SearchFragment.newInstance())
             } else if (type == SearchViewType.RESULT) {
@@ -120,10 +114,6 @@ class SearchActivity : BackDoubleClickFinishActivity<ActivitySearchBinding>(),
                 )
 
                 text_title.text = spannableStringBuilder
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    text_title.animate().translationZ(1.0f).setDuration(200)
-                        .setInterpolator(FastOutSlowInInterpolator()).start()
-                }
 
 
                 changeFragment(SearchResultFragment.newInstance())
